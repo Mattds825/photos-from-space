@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
+import PolaroidViewer from "./components/PolaroidViewer";
 
 
 function App() {
   return (
     <>
       <main>
-        <img src="mars.png" alt="image description"></img>
-        <img src="photo-box.png" alt="photos storage box"></img>
+        <PolaroidViewer />
+        {/* <img src="photo-box.png" alt="photos storage box"></img> */}
       </main>
     </>
   );
