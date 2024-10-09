@@ -81,11 +81,7 @@ const Polaroid = ({ imageUrl, title, date, description }) => {
             line = testLine;
           }
         });
-
-
-
-        // ctx.fillText(description, canvas.width / 2, canvas.height / 2);
-
+        
       // Create texture from canvas
       const textureBack = new THREE.Texture(canvas);
       textureBack.needsUpdate = true; // Ensure the texture is updated
@@ -142,7 +138,7 @@ const Polaroid = ({ imageUrl, title, date, description }) => {
       ref={polaroidRef}
       onClick={handleFlip}
       rotation={[0, rotationY, 0]}
-      scale={[1.5, 1.5, 1.5]}
+    //   scale={[1.5, 1.5, 1.5]}
       material={materials}
     >
       {/* Geometry for Polaroid */}

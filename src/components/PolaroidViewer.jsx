@@ -26,7 +26,7 @@ const PolaroidViewer = () => {
     "This is a sample image of Mars' surface, showcasing the rocky terrain and reddish hue of the planet.";
 
   return (
-    <Canvas style={{ width: "100vw", height: "100vh" }}>
+    <Canvas >
       <ambientLight />
       <OrbitControls enableZoom={false} />
       <Polaroid
