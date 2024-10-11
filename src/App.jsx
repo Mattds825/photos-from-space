@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import PolaroidViewer from "./components/PolaroidViewer";
+import Header from "./components/Header";
 
 function App() {
   const [data, setData] = useState(null);
@@ -40,6 +41,7 @@ function App() {
   }, []);
   return (
     <>
+      <Header />
       {data ? (
         <PolaroidViewer data={data} />
       ) : (
