@@ -47,6 +47,9 @@ function App() {
           <i className="fa-solid fa-gear"></i>
         </div>
       )}
+      <div className="storage-icon-div">
+        <img src="/photo-box.png" alt="" />
+      </div>
     </>
   );
 }

@@ -25,7 +25,7 @@ body {
 
 
 .polaroid-showcase {
-  background: linear-gradient(90deg, #fff, #eee);
+  background: linear-gradient(0deg, #cdcdcd, #9aa9af);
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,7 +42,7 @@ body {
   top: -30vh;
   width: 100%;
   height: 100%;
-  background: radial-gradient(#fff, #e4e4e4);
+  background: linear-gradient(180deg, #fff, #6b828b);
 }
 
 .wrapper {
@@ -81,6 +81,10 @@ body {
   height: 100%;
   margin-top: 5%;
   object-fit: cover;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .image-text-container{
@@ -90,6 +94,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.image-text-container *{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .back {
@@ -150,6 +160,22 @@ body {
     background-size: cover;
     /* prevent default image dragging */
     pointer-events: none;
+}
+
+.storage-icon-div{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.storage-icon-div img{
+  width: 16em;
+  height: 16em;
+  filter: drop-shadow(0 0 0.6em #3e3e3e);
+}
+
+.storage-icon-div img:hover{
+  filter: drop-shadow(0 0 0.6em #646cffaa);
 }
 
 .logo {
