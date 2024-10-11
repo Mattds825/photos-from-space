@@ -25,3 +25,17 @@ canvas{
   width: 80vw;
   height: 80vh;
 }
+
+
+.loadingState{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.loadingState i{
+  opacity: 0.2;
+  font-size: 3rem;
+  animation: spin 1s linear infinite;
+}

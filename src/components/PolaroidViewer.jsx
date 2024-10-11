@@ -1,41 +1,87 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
 import Polaroid from "./Polaroid";
 
-const PolaroidViewer = () => {
-  // useEffect(() => {
-  //   const fetchPhotoData = async () => {
-  //     const response = await axios.get(
-  //       'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY'
-  //     );
-  //     setPhotoData(response.data);
-  //   };
+import { useState, useEffect } from "react";
 
-  //   fetchPhotoData();
-  // }, []);
+const PolaroidViewer = (props) => {
+  const { data } = props;
 
-  // if (!photoData) return <div>Loading...</div>;
+  const [prevRotation, setPrevRotation] = useState(0);
+  const [rotationCalculation, setRotationCalculation] = useState(0);
+  const [polaroidRotationY, setPolaroidRotationY] = useState(0);
 
-  // Path to the local image (public folder)
-  const imageUrl = "/mars.png";
+  useEffect(() => {
+    console.log(data);
+    console.log(data?.hdurl);
+  }, []);
 
-  // Static data for title, date, and description (for testing purposes)
-  const title = "Mars Surface";
-  const date = "2024-10-07";
-  const description =
-    "This is a sample image of Mars' surface, showcasing the rocky terrain and reddish hue of the planet.";
+  //change polaroid style when polaroidRotationY changes
+  useEffect(() => {
+    // console.log("polaroidRotationY changed");
+    // const polaroid = document.querySelector(".polaroid");
+    // const body = document.querySelector("body");
+    // polaroid.style.transform = `rotateY(${polaroidRotationY}deg)`;
+    // // change the cursor to grabbing
+    // body.style.cursor = "grabbing";
+  }, [polaroidRotationY]);
+
+  const handleMouseDown = (e) => {
+    console.log("mouse down");
+    const body = document.querySelector("body");
+    const polaroid = document.querySelector(".polaroid");
+    const section = document.querySelector(".polaroid-showcase");
+
+    // drag sensitivity (the higher the number the less sensitive the drag)
+    const sensitivity = 2;
+
+    // Get the x position of the mouse when the mouse is clicked down
+    const x = e.clientX;
+
+    // pervious rotation value
+    let prev = 0;
+
+    // calculation (stores calculation formula for tracking the mouse and polaroid rotation)
+    let calc = 0;
+
+    function rotate(e) {
+      setRotationCalculation((e.clientX - x) / sensitivity);
+
+      // rotate the polaroid from the previous rotation value
+
+      setPolaroidRotationY(prevRotation + rotationCalculation);
+      
+      calc = (e.clientX - x) / sensitivity;
+      
+      // rotate the polaroid from the previous rotation value
+      polaroid.style.transform = `rotateY(${prev + calc}deg)`;
+      console.log(prev+calc);
+    }
+    // rotate the polaroid on mousemove
+    section.addEventListener("mousemove", rotate);
+
+    // save rotation for the next click
+    setPrevRotation((prev) => prev + rotationCalculation);
+    prev += calc;
+
+    // remove the mousemove event listener when the mouse is released
+    window.addEventListener("mouseup", () => {
+      console.log("mouse up");
+      section.removeEventListener("mousemove", rotate);
+      body.style.cursor = "default";
+    });
+  };
 
   return (
-    <Canvas >
-      <ambientLight />
-      <OrbitControls enableZoom={false} />
-      <Polaroid
-         imageUrl={imageUrl}
-         title={title}
-         date={date}
-         description={description}
-      />
-    </Canvas>
+    <section className="polaroid-showcase" onMouseDown={handleMouseDown}>
+      <div className="wrapper">
+        < Polaroid imageUrl={data?.hdurl} title={data?.title} date={data?.date} description={data?.explanation} />
+      </div>
+    </section>
+    // <Polaroid
+    //   imageUrl={data?.hdurl}
+    //   title={title}
+    //   date={date}
+    //   description={description}
+    // />
   );
 };
 
